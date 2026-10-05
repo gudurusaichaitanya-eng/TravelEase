@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelEase | Flights, Trains, Hotels &amp; Cabs</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0d6efd;
+  --primary-dark:#0b4fa3;
+  --accent:#ff7a00;
+  --light-bg:#f5f8fc;
+  --dark:#1b2a41;
+  --gray:#6c7a93;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(13,45,90,.08);
+}
+*{box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  color:var(--dark);
+  background:var(--light-bg);
+}
+h1,h2,h3,h4,h5{font-weight:700;}
+.section-title{font-weight:800;margin-bottom:.25rem;}
+.section-sub{color:var(--gray);margin-bottom:2.5rem;}
+a{text-decoration:none;}
+.btn-primary-grad{
+  background:linear-gradient(135deg,var(--primary),#3d8bff);
+  border:none;color:#fff;font-weight:600;border-radius:10px;
+  padding:.65rem 1.4rem;transition:.25s;
+}
+.btn-primary-grad:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(13,110,253,.35);color:#fff;}
+.btn-accent{
+  background:linear-gradient(135deg,var(--accent),#ff9d45);
+  border:none;color:#fff;font-weight:600;border-radius:10px;
+  padding:.65rem 1.4rem;transition:.25s;
+}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(255,122,0,.35);color:#fff;}
+.card-soft{
+  background:#fff;border:none;border-radius:var(--radius);box-shadow:var(--shadow);
+  transition:.3s;
+}
+.card-soft:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(13,45,90,.14);}
+
+/* NAVBAR */
+.navbar{
+  background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.05);padding:.8rem 0;
+}
+.navbar-brand{font-weight:800;font-size:1.5rem;color:var(--primary)!important;}
+.navbar-brand span{color:var(--accent);}
+.nav-link{font-weight:500;color:var(--dark)!important;margin:0 .4rem;}
+.nav-link:hover{color:var(--primary)!important;}
+.btn-login{border:2px solid var(--primary);color:var(--primary);border-radius:10px;font-weight:600;padding:.4rem 1.2rem;}
+.btn-login:hover{background:var(--primary);color:#fff;}
+
+/* HERO */
+.hero{
+  position:relative;
+  background:linear-gradient(rgba(10,25,50,.65),rgba(10,25,50,.65)),
+  url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  padding:110px 0 60px;color:#fff;
+}
+.hero h1{font-size:2.8rem;font-weight:800;}
+.hero p{font-size:1.15rem;opacity:.9;max-width:600px;}
+.search-widget{
+  background:#fff;border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,.25);
+  margin-top:40px;color:var(--dark);overflow:hidden;
+}
+.search-tabs{display:flex;background:var(--light-bg);border-bottom:1px solid #e5ebf3;}
+.search-tab{
+  flex:1;text-align:center;padding:16px 10px;font-weight:600;cursor:pointer;color:var(--gray);
+  border-bottom:3px solid transparent;transition:.2s;
+}
+.search-tab i{margin-right:6px;}
+.search-tab.active{color:var(--primary);border-bottom:3px solid var(--primary);background:#fff;}
+.search-panel{display:none;padding:28px;}
+.search-panel.active{display:block;}
+.form-label{font-weight:600;font-size:.85rem;color:var(--gray);}
+.form-control,.form-select{border-radius:10px;padding:.6rem .8rem;border:1.5px solid #e2e8f0;}
+.form-control:focus,.form-select:focus{border-color:var(--primary);box-shadow:0 0 0 .15rem rgba(13,110,253,.15);}
+.swap-btn{
+  width:42px;height:42px;border-radius:50%;background:var(--primary);color:#fff;border:none;
+  display:flex;align-items:center;justify-content:center;margin-top:28px;
+}
+
+section{padding:70px 0;}
+
+/* FLIGHT RESULT CARD */
+.flight-card{padding:20px;border-radius:14px;}
+.airline-logo{
+  width:46px;height:46px;border-radius:50%;background:var(--light-bg);
+  display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.2rem;
+}
+.flight-route{font-weight:700;font-size:1.1rem;}
+.flight-line{position:relative;height:2px;background:#dbe4f0;margin:10px 0;}
+.flight-line::before,.flight-line::after{
+  content:'';position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--primary);
+}
+.flight-line::before{left:0;}
+.flight-line::after{right:0;background:var(--accent);}
+.badge-stop{background:#eef3fb;color:var(--gray);font-weight:500;}
+.price-tag{font-size:1.5rem;font-weight:800;color:var(--primary);}
+
+/* HOTEL CARDS */
+.hotel-img{height:190px;object-fit:cover;border-radius:var(--radius) var(--radius) 0 0;width:100%;}
+.rating-stars{color:#ffb400;font-size:.85rem;}
+.facility-badge{background:var(--light-bg);color:var(--gray);font-size:.75rem;padding:.3rem .6rem;border-radius:8px;margin:2px;display:inline-block;}
+
+/* CAB */
+.cab-card{padding:22px;text-align:center;cursor:pointer;border:2px solid transparent;}
+.cab-card.selected{border-color:var(--primary);background:#f0f6ff;}
+.cab-card i{font-size:2.2rem;color:var(--primary);}
+
+/* COMPARISON TABLE */
+.table-compare thead{background:var(--dark);color:#fff;}
+.table-compare td,.table-compare th{vertical-align:middle;padding:14px;}
+.table-compare tbody tr:hover{background:#f5f9ff;}
+
+/* DESTINATIONS */
+.dest-card{position:relative;border-radius:var(--radius);overflow:hidden;height:280px;}
+.dest-card img{width:100%;height:100%;object-fit:cover;transition:.4s;}
+.dest-card:hover img{transform:scale(1.1);}
+.dest-overlay{
+  position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 60%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px;color:#fff;
+}
+
+/* OFFERS */
+.offer-card{
+  border-radius:var(--radius);padding:26px;color:#fff;position:relative;overflow:hidden;
+}
+.offer-card::after{
+  content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.12);
+}
+.offer1{background:linear-gradient(135deg,#0d6efd,#3d8bff);}
+.offer2{background:linear-gradient(135deg,#ff7a00,#ff9d45);}
+.offer3{background:linear-gradient(135deg,#20c997,#3ddc97);}
+.offer4{background:linear-gradient(135deg,#6f42c1,#9163d6);}
+
+/* MY TRIPS */
+.trip-row{border-radius:14px;padding:18px;display:flex;align-items:center;gap:16px;}
+.trip-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;}
+.status-badge{padding:.35rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600;}
+.status-confirmed{background:#e6f7ee;color:#1a9f5c;}
+.status-pending{background:#fff4e0;color:#d98c00;}
+.status-cancelled{background:#fdeaea;color:#e0453f;}
+
+/* ALERTS */
+.alert-travel{border-radius:12px;border:none;border-left:5px solid;padding:16px 18px;}
+.alert-info-c{background:#eaf3ff;border-color:#0d6efd;}
+.alert-warning-c{background:#fff8e6;border-color:#ffb400;}
+.alert-success-c{background:#e9fbf1;border-color:#20c997;}
+
+/* FOOTER */
+footer{background:var(--dark);color:#c7d2e3;padding:60px 0 20px;}
+footer h5{color:#fff;margin-bottom:1.2rem;}
+footer a{color:#c7d2e3;display:block;margin-bottom:.5rem;}
+footer a:hover{color:var(--accent);}
+.social-icon{
+  width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;color:#fff;margin-right:8px;
+}
+.social-icon:hover{background:var(--primary);}
+
+/* MODALS */
+.modal-content{border-radius:var(--radius);border:none;}
+.pay-method{
+  border:2px solid #e2e8f0;border-radius:12px;padding:14px;text-align:center;cursor:pointer;
+}
+.pay-method.selected{border-color:var(--primary);background:#f0f6ff;}
+.pay-method i{font-size:1.5rem;color:var(--primary);display:block;margin-bottom:6px;}
+
+.toast-container{z-index:2000;}
+
+@media(max-width:768px){
+  .hero h1{font-size:2rem;}
+  .search-tab span{display:none;}
+}
+
+/* HOTEL BOOKING DETAILS + UPI QR */
+.hotel-booking-details{background:#f8fbff;border:1px solid #e2e8f0;border-radius:14px;padding:14px;}
+.hotel-detail-item{padding:8px 0;border-bottom:1px dashed #dbe4f0;}
+.hotel-detail-item:last-child{border-bottom:0;}
+.hotel-detail-label{color:var(--gray);font-size:.78rem;font-weight:600;text-transform:uppercase;}
+.hotel-detail-value{font-weight:600;}
+.upi-box{background:#f8fbff;border:1px solid #dbe7f5;border-radius:14px;padding:18px;text-align:center;}
+#upiQRCode{display:flex;justify-content:center;align-items:center;min-height:180px;margin:10px auto;}
+#upiQRCode img{padding:8px;background:#fff;border-radius:8px;}
+.booking-total-row{font-size:1.05rem;font-weight:700;}
+
+
+/* Professional destination + route polish */
+.popular-route-strip{background:#fff;border:1px solid #e8eef7;border-radius:18px;padding:14px 18px;box-shadow:0 8px 24px rgba(13,45,90,.06)}
+.route-strip-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:700}.route-strip-head small{color:#7a8799;font-weight:500}.route-chips{display:flex;gap:9px;flex-wrap:wrap}.route-chip{border:1px solid #dce6f4;background:#f7faff;color:#183b69;border-radius:999px;padding:8px 14px;font-size:.82rem;font-weight:600;transition:.2s}.route-chip:hover{background:#0d6efd;color:#fff;border-color:#0d6efd;transform:translateY(-1px)}
+.dest-card{overflow:hidden;position:relative;border:0;min-height:235px}.dest-card img{width:100%;height:235px;object-fit:cover;display:block;transition:transform .45s ease}.dest-card:hover img{transform:scale(1.07)}.dest-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.82));pointer-events:none}.dest-overlay{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:20px;color:#fff}.dest-overlay h5{font-weight:700}.dest-overlay small{opacity:.9}.dest-overlay .explore-btn{border:0;border-radius:10px;padding:7px 14px}.flight-card{border:1px solid #e8eef7;transition:.2s}.flight-card:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(13,45,90,.1)}
+
+.train-card{border:1px solid #e7edf6;border-radius:16px;padding:18px;background:#fff;transition:.2s}.train-card:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(13,45,90,.10)}.train-logo{width:46px;height:46px;border-radius:12px;background:#eef5ff;display:flex;align-items:center;justify-content:center;color:#0d6efd;font-size:1.25rem}.train-route-line{height:3px;background:linear-gradient(90deg,#0d6efd,#20c997);border-radius:9px;position:relative}.train-route-line:after{content:'\f238';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;right:45%;top:-13px;background:#fff;padding:0 8px;color:#0d6efd}.station-chip{background:#f5f8fc;border:1px solid #e4ebf5;border-radius:10px;padding:6px 10px;font-size:.82rem}.quota-badge{font-size:.72rem;border-radius:20px;padding:5px 9px;background:#eafaf3;color:#16845b;font-weight:700}.train-search-note{background:#f0f7ff;border-left:4px solid #0d6efd;border-radius:10px;padding:10px 13px;color:#40516b;font-size:.85rem}.india-strip{background:linear-gradient(135deg,#0d6efd,#193b72);color:#fff;border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(13,45,90,.12)}
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home"><i class="fa-solid fa-plane-departure"></i> Travel<span>Ease</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#booking">Flights</a></li>
+        <li class="nav-item"><a class="nav-link" href="#trainResultsSection">Trains</a></li>
+        <li class="nav-item"><a class="nav-link" href="#hotels">Hotels</a></li>
+        <li class="nav-item"><a class="nav-link" href="#cabs">Cabs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#mytrips">My Trips</a></li>
+        <li class="nav-item"><a class="nav-link" href="#offers">Offers</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <div class="d-flex gap-2 align-items-center" id="authButtons">
+        <button class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        <button class="btn btn-primary-grad" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO + SEARCH WIDGET ============ -->
+<header class="hero" id="home">
+  <div class="container">
+    <h1>Plan Your Journey With Ease</h1>
+    <p>Search, compare and book <strong>flights, trains, hotels and cabs</strong> across India and beyond — all in one place.</p>
+
+    <div class="search-widget" id="booking">
+      <div class="search-tabs">
+        <div class="search-tab active" data-tab="flights"><i class="fa-solid fa-plane"></i><span> Flights</span></div>
+        <div class="search-tab" data-tab="trains"><i class="fa-solid fa-train"></i><span> Trains</span></div>
+        <div class="search-tab" data-tab="hotels"><i class="fa-solid fa-hotel"></i><span> Hotels</span></div>
+        <div class="search-tab" data-tab="cabs"><i class="fa-solid fa-taxi"></i><span> Cabs</span></div>
+      </div>
+
+      <!-- FLIGHT SEARCH PANEL -->
+      <div class="search-panel active" id="panel-flights">
+        <div class="d-flex gap-4 mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tripType" id="oneWay" checked>
+            <label class="form-check-label" for="oneWay">One Way</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tripType" id="roundTrip">
+            <label class="form-check-label" for="roundTrip">Round Trip</label>
+          </div>
+        </div>
+        <form id="flightForm" class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label">FROM</label>
+            <input type="text" class="form-control" id="fromCity" value="Delhi (DEL)" list="cityList" placeholder="e.g. Vijayawada (VGA)" required>
+          </div>
+          <div class="col-md-auto d-flex justify-content-center">
+            <button type="button" class="swap-btn" id="swapCities" title="Swap"><i class="fa-solid fa-right-left"></i></button>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">TO</label>
+            <input type="text" class="form-control" id="toCity" value="Mumbai (BOM)" list="cityList" placeholder="e.g. Goa (GOI)" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">DEPARTURE</label>
+            <input type="date" class="form-control" id="departDate" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">RETURN</label>
+            <input type="date" class="form-control" id="returnDate">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">PASSENGERS</label>
+            <select class="form-select" id="passengers">
+              <option>1 Adult</option>
+              <option>2 Adults</option>
+              <option>3 Adults</option>
+              <option>2 Adults, 1 Child</option>
+              <option>4 Adults</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">CLASS</label>
+            <select class="form-select" id="flightClass">
+              <option>Economy</option>
+              <option>Premium Economy</option>
+              <option>Business</option>
+              <option>First Class</option>
+            </select>
+          </div>
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary-grad w-100"><i class="fa-solid fa-magnifying-glass"></i> Search Flights</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TRAIN SEARCH PANEL -->
+      <div class="search-panel" id="panel-trains">
+        <div class="train-search-note mb-3"><i class="fa-solid fa-circle-info me-2"></i>Search trains across major Indian Railways stations. Booking in this demo is simulated for your college project.</div>
+        <form id="trainForm" class="row g-3 align-items-end">
+          <div class="col-md-3"><label class="form-label">FROM STATION</label><input type="text" class="form-control" id="trainFrom" value="Vijayawada (BZA)" list="stationList" placeholder="e.g. Vijayawada (BZA)" required></div>
+          <div class="col-md-1 d-flex justify-content-center"><button type="button" class="swap-btn" id="swapTrainCities" title="Swap"><i class="fa-solid fa-right-left"></i></button></div>
+          <div class="col-md-3"><label class="form-label">TO STATION</label><input type="text" class="form-control" id="trainTo" value="Hyderabad (HYB)" list="stationList" placeholder="e.g. Hyderabad (HYB)" required></div>
+          <div class="col-md-2"><label class="form-label">JOURNEY DATE</label><input type="date" class="form-control" id="trainDate" required></div>
+          <div class="col-md-1"><label class="form-label">PASSENGERS</label><select class="form-select" id="trainPassengers"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+          <div class="col-md-2"><label class="form-label">CLASS</label><select class="form-select" id="trainClass"><option>Sleeper (SL)</option><option>AC 3 Tier (3A)</option><option>AC 2 Tier (2A)</option><option>AC First Class (1A)</option><option>Chair Car (CC)</option><option>Executive Chair Car (EC)</option></select></div>
+          <div class="col-md-10"><small class="text-muted"><i class="fa-solid fa-shield-halved me-1"></i>Demo availability • Popular routes • Multiple classes</small></div>
+          <div class="col-md-2"><button type="submit" class="btn btn-primary-grad w-100"><i class="fa-solid fa-magnifying-glass"></i> Search Trains</button></div>
+        </form>
+      </div>
+
+      <!-- HOTEL SEARCH PANEL -->
+      <div class="search-panel" id="panel-hotels">
+        <form id="hotelForm" class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label class="form-label">DESTINATION</label>
+            <input type="text" class="form-control" id="hotelCity" value="Goa, India" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">CHECK-IN</label>
+            <input type="date" class="form-control" id="checkIn" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">CHECK-OUT</label>
+            <input type="date" class="form-control" id="checkOut" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">GUESTS</label>
+            <select class="form-select" id="guests">
+              <option>2 Guests</option>
+              <option>1 Guest</option>
+              <option>3 Guests</option>
+              <option>4 Guests</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">ROOMS</label>
+            <select class="form-select" id="rooms">
+              <option>1 Room</option>
+              <option>2 Rooms</option>
+              <option>3 Rooms</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary-grad w-100"><i class="fa-solid fa-magnifying-glass"></i> Search Hotels</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- CAB SEARCH PANEL -->
+      <div class="search-panel" id="panel-cabs">
+        <form id="cabForm" class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label">PICKUP LOCATION</label>
+            <input type="text" class="form-control" id="pickupLoc" value="Airport - T3, Delhi" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">DROP LOCATION</label>
+            <input type="text" class="form-control" id="dropLoc" value="Connaught Place, Delhi" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">DATE</label>
+            <input type="date" class="form-control" id="cabDate" required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">TIME</label>
+            <input type="time" class="form-control" id="cabTime" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary-grad w-100"><i class="fa-solid fa-magnifying-glass"></i> Find Cabs</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<datalist id="cityList">
+  <option value="Delhi (DEL)"><option value="Mumbai (BOM)"><option value="Hyderabad (HYD)"><option value="Bengaluru (BLR)"><option value="Chennai (MAA)"><option value="Kolkata (CCU)"><option value="Pune (PNQ)"><option value="Goa (GOI)"><option value="Vijayawada (VGA)"><option value="Visakhapatnam (VTZ)"><option value="Ahmedabad (AMD)"><option value="Jaipur (JAI)"><option value="Kochi (COK)"><option value="Lucknow (LKO)"><option value="Dubai (DXB)"><option value="Singapore (SIN)"><option value="Bangkok (BKK)"><option value="Kuala Lumpur (KUL)"><option value="Tokyo (NRT)"><option value="Paris (CDG)">
+</datalist>
+<datalist id="stationList"><option value="New Delhi (NDLS)"><option value="Mumbai Central (BCT)"><option value="Chhatrapati Shivaji Maharaj Terminus (CSMT)"><option value="Hyderabad (HYB)"><option value="Secunderabad (SC)"><option value="Vijayawada (BZA)"><option value="Guntur (GNT)"><option value="Visakhapatnam (VSKP)"><option value="Rajahmundry (RJY)"><option value="Tirupati (TPTY)"><option value="Chennai (MAS)"><option value="Bengaluru (SBC)"><option value="Mysuru (MYS)"><option value="Kolkata (HWH)"><option value="Howrah (HWH)"><option value="Patna (PNBE)"><option value="Varanasi (BSB)"><option value="Lucknow (LKO)"><option value="Kanpur (CNB)"><option value="Jaipur (JP)"><option value="Ahmedabad (ADI)"><option value="Surat (ST)"><option value="Pune (PUNE)"><option value="Nagpur (NGP)"><option value="Bhopal (BPL)"><option value="Indore (INDB)"><option value="Kochi (ERS)"><option value="Thiruvananthapuram (TVC)"><option value="Coimbatore (CBE)"><option value="Madurai (MDU)"><option value="Bhubaneswar (BBS)"><option value="Puri (PURI)"><option value="Ranchi (RNC)"><option value="Raipur (R)"><option value="Jammu Tawi (JAT)"><option value="Amritsar (ASR)"><option value="Chandigarh (CDG)"><option value="Dehradun (DDN)"><option value="Haridwar (HW)"><option value="Agra Cantt (AGC)"><option value="Gwalior (GWL)"><option value="Jodhpur (JU)"><option value="Udaipur (UDZ)"><option value="Guwahati (GHY)"><option value="Siliguri (NJP)"><option value="Rourkela (ROU)"><option value="Dhanbad (DHN)"><option value="Jabalpur (JBP)"><option value="Nashik Road (NK)"><option value="Goa Madgaon (MAO)"></datalist>
+<div class="popular-route-strip
+<div class="popular-route-strip container mt-3 mb-4">
+  <div class="route-strip-head"><span><i class="fa-solid fa-bolt text-warning me-2"></i>Popular routes</span><small>One click to search</small></div>
+  <div class="route-chips">
+    <button type="button" class="route-chip train-route-chip" data-from="Vijayawada (BZA)" data-to="Hyderabad (HYB)"><i class="fa-solid fa-train me-1"></i> Vijayawada → Hyderabad</button>
+    <button type="button" class="route-chip train-route-chip" data-from="New Delhi (NDLS)" data-to="Varanasi (BSB)"><i class="fa-solid fa-train me-1"></i> Delhi → Varanasi</button>
+    <button type="button" class="route-chip train-route-chip" data-from="Mumbai Central (BCT)" data-to="Ahmedabad (ADI)"><i class="fa-solid fa-train me-1"></i> Mumbai → Ahmedabad</button>
+    <button type="button" class="route-chip train-route-chip" data-from="Chennai (MAS)" data-to="Bengaluru (SBC)"><i class="fa-solid fa-train me-1"></i> Chennai → Bengaluru</button>
+
+    <button type="button" class="route-chip" data-from="Vijayawada (VGA)" data-to="Hyderabad (HYD)">Vijayawada → Hyderabad</button>
+    <button type="button" class="route-chip" data-from="Hyderabad (HYD)" data-to="Delhi (DEL)">Hyderabad → Delhi</button>
+    <button type="button" class="route-chip" data-from="Mumbai (BOM)" data-to="Hyderabad (HYD)">Mumbai → Hyderabad</button>
+    <button type="button" class="route-chip" data-from="Delhi (DEL)" data-to="Dubai (DXB)">Delhi → Dubai</button>
+    <button type="button" class="route-chip" data-from="Chennai (MAA)" data-to="Singapore (SIN)">Chennai → Singapore</button>
+  </div>
+</div>
+
+<!-- ============ TRAVEL ALERTS ============ -->
+<section class="pt-5 pb-0">
+  <div class="container">
+    <h2 class="section-title">Travel Alerts</h2>
+    <p class="section-sub">Live updates on your bookings</p>
+    <div class="row g-3" id="alertsContainer">
+      <div class="col-md-4">
+        <div class="alert-travel alert-info-c"><i class="fa-solid fa-circle-info me-2"></i><strong>Gate Change:</strong> Flight AI-202 now departs from Gate 14B.</div>
+      </div>
+      <div class="col-md-4">
+        <div class="alert-travel alert-warning-c"><i class="fa-solid fa-triangle-exclamation me-2"></i><strong>Flight Delay:</strong> 6E-345 delayed by 40 minutes.</div>
+      </div>
+      <div class="col-md-4">
+        <div class="alert-travel alert-success-c"><i class="fa-solid fa-circle-check me-2"></i><strong>Hotel Confirmed:</strong> Taj Exotica booking confirmed for 3 nights.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLIGHT RESULTS ============ -->
+<section id="trainResultsSection" class="bg-white">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-3"><div><h2 class="section-title mb-1">Available Trains</h2><p class="section-sub mb-0">Comfortable rail journeys across India</p></div><select class="form-select w-auto" id="sortTrains"><option value="price">Sort by Price</option><option value="departure">Sort by Departure</option><option value="duration">Sort by Duration</option></select></div>
+    <div id="trainResults" class="d-flex flex-column gap-3"></div>
+  </div>
+</section>
+
+<section id="flightResultsSection">
+  <div class="container">
+    <h2 class="section-title">Available Flights</h2>
+    <p class="section-sub">Best fares for your route, updated live</p>
+    <div class="d-flex justify-content-end mb-3">
+      <select class="form-select w-auto" id="sortFlights">
+        <option value="price">Sort by: Price (Low to High)</option>
+        <option value="duration">Sort by: Duration</option>
+        <option value="departure">Sort by: Departure Time</option>
+      </select>
+    </div>
+    <div id="flightResults" class="d-flex flex-column gap-3"></div>
+  </div>
+</section>
+
+<!-- ============ HOTELS ============ -->
+<section id="hotels" class="bg-white">
+  <div class="container">
+    <h2 class="section-title">Handpicked Hotels</h2>
+    <p class="section-sub">Comfort and luxury for every budget</p>
+    <div class="row g-4" id="hotelResults"></div>
+  </div>
+</section>
+
+<!-- ============ CABS ============ -->
+<section id="cabs">
+  <div class="container">
+    <h2 class="section-title">Book a Cab</h2>
+    <p class="section-sub">Choose your ride, estimated fare shown instantly</p>
+    <div class="row g-3" id="cabResults"></div>
+    <div class="text-center mt-4">
+      <h4>Estimated Fare: <span class="text-primary" id="estimatedFare">₹0</span></h4>
+      <button class="btn btn-accent mt-2" id="bookCabBtn"><i class="fa-solid fa-taxi"></i> Book Cab</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FARE COMPARISON ============ -->
+<section class="bg-white">
+  <div class="container">
+    <h2 class="section-title">Compare Fares</h2>
+    <p class="section-sub">Choose the best option across providers</p>
+    <div class="table-responsive">
+      <table class="table table-compare card-soft mb-0">
+        <thead>
+          <tr>
+            <th>Provider</th><th>Service</th><th>Price</th><th>Rating</th><th>Duration</th><th>Cancellation</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="compareTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESTINATIONS ============ -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Popular Destinations</h2>
+    <p class="section-sub">Where travelers are headed this season</p>
+    <div class="row g-4" id="destinationsContainer"></div>
+  </div>
+</section>
+
+<!-- ============ OFFERS ============ -->
+<section id="offers" class="bg-white">
+  <div class="container">
+    <h2 class="section-title">Special Offers</h2>
+    <p class="section-sub">Deals you don't want to miss</p>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="offer-card offer1">
+          <i class="fa-solid fa-plane fa-2x mb-3"></i>
+          <h4>20% OFF</h4>
+          <p>On domestic flight bookings. Use code FLY20.</p>
+          <button class="btn btn-light btn-sm fw-semibold book-offer">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="offer-card offer2">
+          <i class="fa-solid fa-hotel fa-2x mb-3"></i>
+          <h4>Weekend Deal</h4>
+          <p>Flat 30% off on hotel stays this weekend.</p>
+          <button class="btn btn-light btn-sm fw-semibold book-offer">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="offer-card offer3">
+          <i class="fa-solid fa-taxi fa-2x mb-3"></i>
+          <h4>Airport Transfer</h4>
+          <p>Flat ₹99 off on your first airport cab ride.</p>
+          <button class="btn btn-light btn-sm fw-semibold book-offer">Book Now</button>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="offer-card offer4">
+          <i class="fa-solid fa-earth-asia fa-2x mb-3"></i>
+          <h4>Go International</h4>
+          <p>Save up to ₹8,000 on international packages.</p>
+          <button class="btn btn-light btn-sm fw-semibold book-offer">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MY TRIPS ============ -->
+<section id="mytrips">
+  <div class="container">
+    <h2 class="section-title">My Trips</h2>
+    <p class="section-sub">Your upcoming and past bookings</p>
+    <div class="d-flex flex-column gap-3" id="tripsContainer"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="bg-white">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-sub">We're here to help, 24/7</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card-soft p-4 text-center h-100">
+          <i class="fa-solid fa-phone fa-2x text-primary mb-3"></i>
+          <h5>Call Us</h5>
+          <p class="text-muted mb-0">+91 98765 43210</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-soft p-4 text-center h-100">
+          <i class="fa-solid fa-envelope fa-2x text-primary mb-3"></i>
+          <h5>Email Us</h5>
+          <p class="text-muted mb-0">support@travelease.com</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-soft p-4 text-center h-100">
+          <i class="fa-solid fa-location-dot fa-2x text-primary mb-3"></i>
+          <h5>Visit Us</h5>
+          <p class="text-muted mb-0">MG Road, Bengaluru, India</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <a class="navbar-brand text-white" href="#home"><i class="fa-solid fa-plane-departure"></i> Travel<span class="text-warning">Ease</span></a>
+        <p class="mt-3">Your trusted partner for flights, trains, hotels and cabs — making travel simple, affordable and enjoyable across India.</p>
+      </div>
+      <div class="col-md-3">
+        <h5>Quick Links</h5>
+        <a href="#home">Home</a>
+        <a href="#booking">Flights</a>
+        <a href="#trainResultsSection">Trains</a>
+        <a href="#hotels">Hotels</a>
+        <a href="#cabs">Cabs</a>
+      </div>
+      <div class="col-md-3">
+        <h5>Services</h5>
+        <a href="#mytrips">My Trips</a>
+        <a href="#offers">Offers</a>
+        <a href="#">Travel Insurance</a>
+        <a href="#">Group Booking</a>
+      </div>
+      <div class="col-md-3">
+        <h5>Support</h5>
+        <a href="#contact">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="#">Cancellation Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <hr class="border-secondary mt-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center pt-2">
+      <p class="mb-2 mb-md-0">&copy; 2026 TravelEase. All rights reserved.</p>
+      <div class="d-flex">
+        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ LOGIN MODAL ============ -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Login to TravelEase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="loginEmail" required>
+            <div class="invalid-feedback">Please enter a valid email.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" required minlength="6">
+            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <a href="#" class="small">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary-grad w-100">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ REGISTER MODAL ============ -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Create Your Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="regName" required>
+            <div class="invalid-feedback">Please enter your name.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+            <div class="invalid-feedback">Please enter a valid email.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required minlength="6">
+            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="regConfirmPassword" required>
+            <div class="invalid-feedback">Passwords do not match.</div>
+          </div>
+          <button type="submit" class="btn btn-primary-grad w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ACCOUNT MODAL ============ -->
+<div class="modal fade" id="accountModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title"><i class="fa-solid fa-circle-user me-2 text-primary"></i>My Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-4">
+          <div class="mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center bg-primary text-white" style="width:76px;height:76px;font-size:2rem;">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <h4 id="accountName" class="mb-1">Guest User</h4>
+          <p id="accountEmail" class="text-muted mb-0">-</p>
+        </div>
+        <div class="row g-3">
+          <div class="col-6"><div class="card-soft p-3 text-center"><small class="text-muted">Member Since</small><div id="accountSince" class="fw-bold mt-1">-</div></div></div>
+          <div class="col-6"><div class="card-soft p-3 text-center"><small class="text-muted">My Bookings</small><div id="accountBookings" class="fw-bold mt-1">0</div></div></div>
+        </div>
+        <div class="card-soft p-3 mt-3">
+          <div class="d-flex justify-content-between mb-2"><span class="text-muted">Account status</span><span class="badge bg-success">Active</span></div>
+          <div class="d-flex justify-content-between"><span class="text-muted">TravelEase member</span><i class="fa-solid fa-check text-success"></i></div>
+        </div>
+        <button type="button" class="btn btn-outline-primary w-100 mt-3" id="accountTripsBtn"><i class="fa-solid fa-suitcase me-2"></i>View My Trips</button>
+        <button type="button" class="btn btn-danger w-100 mt-2" id="accountLogoutBtn"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAYMENT MODAL ============ -->
+<div class="modal fade" id="paymentModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title"><i class="fa-solid fa-lock text-primary me-2"></i>Complete Payment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card-soft p-3 mb-3">
+          <h6 class="mb-3"><i class="fa-solid fa-receipt me-2"></i>Booking Summary</h6>
+          <div class="d-flex justify-content-between"><span>Service:</span><strong id="paySummaryService">-</strong></div>
+          <div class="d-flex justify-content-between mt-2"><span>Details:</span><strong id="paySummaryDetails" class="text-end ms-3">-</strong></div>
+          <div id="hotelPaymentDetails" class="hotel-booking-details mt-3" style="display:none;">
+            <h6 class="text-primary mb-2"><i class="fa-solid fa-hotel me-2"></i>Hotel Booking Details</h6>
+            <div class="row g-2">
+              <div class="col-md-6"><div class="hotel-detail-item"><div class="hotel-detail-label">Hotel</div><div class="hotel-detail-value" id="payHotelName">-</div></div></div>
+              <div class="col-md-6"><div class="hotel-detail-item"><div class="hotel-detail-label">Location</div><div class="hotel-detail-value" id="payHotelLocation">-</div></div></div>
+              <div class="col-md-3"><div class="hotel-detail-item"><div class="hotel-detail-label">Check-in</div><div class="hotel-detail-value" id="payHotelCheckIn">-</div></div></div>
+              <div class="col-md-3"><div class="hotel-detail-item"><div class="hotel-detail-label">Check-out</div><div class="hotel-detail-value" id="payHotelCheckOut">-</div></div></div>
+              <div class="col-md-2"><div class="hotel-detail-item"><div class="hotel-detail-label">Nights</div><div class="hotel-detail-value" id="payHotelNights">-</div></div></div>
+              <div class="col-md-2"><div class="hotel-detail-item"><div class="hotel-detail-label">Guests</div><div class="hotel-detail-value" id="payHotelGuests">-</div></div></div>
+              <div class="col-md-2"><div class="hotel-detail-item"><div class="hotel-detail-label">Rooms</div><div class="hotel-detail-value" id="payHotelRooms">-</div></div></div>
+              <div class="col-md-6"><div class="hotel-detail-item"><div class="hotel-detail-label">Price / Room / Night</div><div class="hotel-detail-value" id="payHotelPrice">-</div></div></div>
+              <div class="col-md-6"><div class="hotel-detail-item"><div class="hotel-detail-label">Total Hotel Cost</div><div class="hotel-detail-value text-primary" id="payHotelTotal">-</div></div></div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-3 pt-3 border-top booking-total-row"><span>Total Amount:</span><strong class="text-primary" id="paySummaryAmount">₹0</strong></div>
+        </div>
+
+        <label class="form-label">Select Payment Method</label>
+        <div class="row g-2 mb-3">
+          <div class="col-6 col-md-3"><div class="pay-method selected" data-method="Credit Card"><i class="fa-solid fa-credit-card"></i><small>Credit Card</small></div></div>
+          <div class="col-6 col-md-3"><div class="pay-method" data-method="Debit Card"><i class="fa-regular fa-credit-card"></i><small>Debit Card</small></div></div>
+          <div class="col-6 col-md-3"><div class="pay-method" data-method="UPI"><i class="fa-solid fa-qrcode"></i><small>UPI QR</small></div></div>
+          <div class="col-6 col-md-3"><div class="pay-method" data-method="Net Banking"><i class="fa-solid fa-building-columns"></i><small>Net Banking</small></div></div>
+        </div>
+
+        <form id="paymentForm">
+          <div id="cardFields">
+            <div class="mb-2"><label class="form-label">Card Number</label><input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" required></div>
+            <div class="row g-2 mb-2"><div class="col-6"><label class="form-label">Expiry</label><input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" maxlength="5" required></div><div class="col-6"><label class="form-label">CVV</label><input type="password" class="form-control" id="cardCvv" placeholder="***" maxlength="3" inputmode="numeric" required></div></div>
+          </div>
+          <div id="upiFields" style="display:none;">
+            <div class="upi-box">
+              <h6><i class="fa-solid fa-mobile-screen-button text-primary me-2"></i>Scan & Pay with UPI</h6>
+              <p class="small text-muted mb-1">Scan this QR code using Google Pay, PhonePe, Paytm or another UPI app.</p>
+              <div id="upiQRCode"></div>
+              <div class="fw-semibold">UPI ID: <span class="text-primary">travelease@upi</span></div>
+              <div class="small text-muted mt-1">Amount: <strong id="upiAmount">₹0</strong></div>
+              <div class="mt-3 text-start"><label class="form-label">UPI Transaction ID (Demo)</label><input type="text" class="form-control" id="upiTransactionId" placeholder="Enter transaction/reference ID" required></div>
+            </div>
+          </div>
+          <div id="netBankingFields" style="display:none;">
+            <label class="form-label">Select Bank</label>
+            <select class="form-select" id="bankSelect" required><option value="">Choose Bank</option><option>State Bank of India</option><option>HDFC Bank</option><option>ICICI Bank</option><option>Axis Bank</option><option>Kotak Mahindra Bank</option></select>
+          </div>
+          <button type="submit" class="btn btn-accent w-100 mt-3"><i class="fa-solid fa-lock"></i> Pay Now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HOTEL / TRIP DETAILS MODAL ============ -->
+<div class="modal fade" id="detailsModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0"><h5 class="modal-title"><i class="fa-solid fa-circle-info text-primary me-2"></i>Booking Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body" id="detailsModalBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BOOKING CONFIRMATION MODAL ============ -->
+<div class="modal fade" id="confirmationModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3 text-center">
+      <div class="modal-body">
+        <i class="fa-solid fa-circle-check text-success" style="font-size:4rem;"></i>
+        <h4 class="mt-3">Booking Confirmed!</h4>
+        <p class="text-muted">Your booking has been successfully placed.</p>
+        <div class="card-soft p-3 text-start my-3">
+          <div class="d-flex justify-content-between"><span>Booking ID:</span><strong id="confBookingId">-</strong></div>
+          <div class="d-flex justify-content-between"><span>Service:</span><strong id="confService">-</strong></div>
+          <div class="d-flex justify-content-between"><span>Date:</span><strong id="confDate">-</strong></div>
+          <div class="d-flex justify-content-between"><span>Amount Paid:</span><strong id="confAmount">-</strong></div>
+          <div class="d-flex justify-content-between"><span>Status:</span><span class="status-badge status-confirmed">Confirmed</span></div>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary-grad w-100" id="downloadTicketBtn"><i class="fa-solid fa-download"></i> Download Ticket</button>
+          <button class="btn btn-accent w-100" data-bs-dismiss="modal" id="goToTripsBtn"><i class="fa-solid fa-suitcase"></i> Go to My Trips</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container for alerts -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastHolder"></div>
+
+<!-- Bootstrap Bundle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+/* ============================================================
+   TravelEase - Complete Demo Frontend
+   Payments/bookings are simulated; no real backend is connected.
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const formatCurrency = n => "₹" + Number(n || 0).toLocaleString("en-IN");
+const generateBookingId = prefix => prefix + "-" + Math.floor(100000 + Math.random()*900000);
+
+const cityAirports = {
+  "Delhi":"DEL","Mumbai":"BOM","Hyderabad":"HYD","Bengaluru":"BLR","Chennai":"MAA","Kolkata":"CCU","Pune":"PNQ","Goa":"GOI","Vijayawada":"VGA","Visakhapatnam":"VTZ","Ahmedabad":"AMD","Jaipur":"JAI","Kochi":"COK","Lucknow":"LKO","Dubai":"DXB","Singapore":"SIN","Bangkok":"BKK","Kuala Lumpur":"KUL","Tokyo":"NRT","Paris":"CDG"
+};
+const cityBasePrices = {DEL:3999,BOM:4299,HYD:4499,BLR:4999,MAA:4699,CCU:5299,PNQ:4399,GOI:3999,VGA:3599,VTZ:3799,AMD:4199,JAI:4299,COK:4999,LKO:4599,DXB:22999,SIN:28499,BKK:19999,KUL:21999,NRT:52999,CDG:45999};
+const flightData = [
+  {airline:"IndiGo",code:"6E-234",logo:"fa-plane",dep:"06:15",arr:"08:20",from:"DEL",to:"BOM",duration:"2h 05m",stops:"Non-stop",price:4599}
+];
+function cityInfo(value){
+  const v=(value||"").trim();
+  const match=v.match(/^(.*?)\s*\(([A-Z]{3})\)$/);
+  if(match) return {name:match[1].trim(),code:match[2]};
+  const key=Object.keys(cityAirports).find(c=>c.toLowerCase()===v.toLowerCase());
+  return key ? {name:key,code:cityAirports[key]} : {name:v,code:(v.substring(0,3)||"XXX").toUpperCase()};
+}
+function generateFlights(fromValue,toValue){
+  const from=cityInfo(fromValue), to=cityInfo(toValue);
+  const base=Math.max(1999,Math.round(((cityBasePrices[from.code]||4499)+(cityBasePrices[to.code]||4499))/2));
+  const international=["DXB","SIN","BKK","KUL","NRT","CDG"].includes(from.code)||["DXB","SIN","BKK","KUL","NRT","CDG"].includes(to.code);
+  const durations=international?["4h 05m","4h 25m","5h 10m","5h 45m","6h 20m"]:["1h 10m","1h 45m","2h 20m","2h 55m","3h 30m"];
+  const times=[["06:15","08:20"],["09:40","12:10"],["13:05","16:50"],["18:20","20:35"],["21:00","23:15"]];
+  const airlines=[["IndiGo","6E"],["Air India","AI"],["Vistara","UK"],["SpiceJet","SG"],["Akasa Air","QP"]];
+  return airlines.map((a,i)=>({airline:a[0],code:a[1]+"-"+(200+i*137),logo:"fa-plane",dep:times[i][0],arr:times[i][1],from:from.code,to:to.code,duration:durations[i],stops:i===2?"1 Stop":"Non-stop",price:Math.round(base*(i===2?0.92:1+(i*0.055)))}));
+}
+
+const trainStations = {
+  "New Delhi":"NDLS","Mumbai Central":"BCT","Chhatrapati Shivaji Maharaj Terminus":"CSMT","Hyderabad":"HYB","Secunderabad":"SC","Vijayawada":"BZA","Guntur":"GNT","Visakhapatnam":"VSKP","Rajahmundry":"RJY","Tirupati":"TPTY","Chennai":"MAS","Bengaluru":"SBC","Mysuru":"MYS","Kolkata":"HWH","Howrah":"HWH","Patna":"PNBE","Varanasi":"BSB","Lucknow":"LKO","Kanpur":"CNB","Jaipur":"JP","Ahmedabad":"ADI","Surat":"ST","Pune":"PUNE","Nagpur":"NGP","Bhopal":"BPL","Indore":"INDB","Kochi":"ERS","Thiruvananthapuram":"TVC","Coimbatore":"CBE","Madurai":"MDU","Bhubaneswar":"BBS","Puri":"PURI","Ranchi":"RNC","Raipur":"R","Jammu Tawi":"JAT","Amritsar":"ASR","Chandigarh":"CDG","Dehradun":"DDN","Haridwar":"HW","Agra Cantt":"AGC","Gwalior":"GWL","Jodhpur":"JU","Udaipur":"UDZ","Guwahati":"GHY","Siliguri":"NJP","Rourkela":"ROU","Dhanbad":"DHN","Jabalpur":"JBP","Nashik Road":"NK","Goa Madgaon":"MAO"
+};
+const trainBaseFares={"NDLS":850,"BCT":900,"CSMT":900,"HYB":650,"SC":650,"BZA":550,"GNT":500,"VSKP":600,"RJY":520,"TPTY":550,"MAS":750,"SBC":800,"MYS":780,"HWH":950,"PNBE":800,"BSB":780,"LKO":760,"CNB":720,"JP":850,"ADI":900,"ST":850,"PUNE":800,"NGP":720,"BPL":700,"INDB":720,"ERS":950,"TVC":1050,"CBE":900,"MDU":920,"BBS":850,"PURI":850,"RNC":780,"R":700,"JAT":1200,"ASR":1150,"CDG":1050,"DDN":1000,"HW":980,"AGC":800,"GWL":780,"JU":980,"UDZ":1050,"GHY":1250,"NJP":1150,"ROU":850,"DHN":800,"JBP":780,"NK":820,"MAO":950};
+function stationInfo(value){const v=(value||'').trim();const m=v.match(/^(.*?)\s*\(([A-Z0-9]+)\)$/);if(m)return {name:m[1].trim(),code:m[2]};const key=Object.keys(trainStations).find(x=>x.toLowerCase()===v.toLowerCase());return key?{name:key,code:trainStations[key]}:{name:v,code:(v.substring(0,4)||'XXXX').toUpperCase()};}
+function generateTrains(fromValue,toValue){const from=stationInfo(fromValue),to=stationInfo(toValue);const base=Math.max(300,Math.round(((trainBaseFares[from.code]||700)+(trainBaseFares[to.code]||700))/2));const names=['Vande Bharat Express','Rajdhani Express','Shatabdi Express','Duronto Express','Superfast Express','Intercity Express'];const nums=['20833','12434','12025','12245','12701','12796'];const times=[['05:30','11:10'],['07:10','13:45'],['09:00','15:20'],['14:15','20:40'],['18:30','01:15'],['21:05','05:45']];const durations=['5h 40m','6h 35m','6h 20m','6h 25m','6h 45m','8h 40m'];return names.map((name,i)=>({name,number:nums[i],from:from.code,to:to.code,dep:times[i][0],arr:times[i][1],duration:durations[i],class:i%3===0?'CC / 3A':i%3===1?'2A / 3A':'SL / 3A',fare:Math.round(base*(i===0?1.45:i===1?1.3:i===2?1.15:i===3?1.08:i===4?.92:.82))}));}
+
+const hotelData = [
+  {name:"Taj Exotica Resort",location:"Goa, India",rating:5,img:"https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=600&auto=format&fit=crop",facilities:["Pool","Spa","Wifi","Breakfast"],price:12500},
+  {name:"The Leela Palace",location:"Bengaluru, India",rating:5,img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop",facilities:["Wifi","Gym","Bar","Parking"],price:9800},
+  {name:"Radisson Blu",location:"Hyderabad, India",rating:4,img:"https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=600&auto=format&fit=crop",facilities:["Pool","Wifi","Breakfast"],price:6200},
+  {name:"Novotel Suites",location:"Mumbai, India",rating:4,img:"https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=600&auto=format&fit=crop",facilities:["Wifi","Gym","Breakfast"],price:7300},
+  {name:"Marina Bay Sands",location:"Singapore",rating:5,img:"https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=600&auto=format&fit=crop",facilities:["Pool","Spa","Wifi","Casino"],price:24500},
+  {name:"Burj Al Arab",location:"Dubai, UAE",rating:5,img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=600&auto=format&fit=crop",facilities:["Pool","Spa","Butler","Wifi"],price:45000}
+];
+const cabTypes = [
+  {type:"Mini",icon:"fa-car",capacity:"4 Seats",baseFare:250,perKm:9},
+  {type:"Sedan",icon:"fa-car-side",capacity:"4 Seats",baseFare:350,perKm:12},
+  {type:"SUV",icon:"fa-truck-pickup",capacity:"6 Seats",baseFare:500,perKm:16},
+  {type:"Premium",icon:"fa-car-rear",capacity:"4 Seats",baseFare:800,perKm:22}
+];
+const compareData = [
+  {provider:"IndiGo",service:"Flight DEL-BOM",price:"₹4,599",rating:"4.3★",duration:"2h 05m",cancel:"Free before 24h"},
+  {provider:"MakeMyTrip",service:"Taj Exotica, Goa",price:"₹12,500/night",rating:"4.7★",duration:"Per night",cancel:"Free cancellation"},
+  {provider:"Ola Cabs",service:"Sedan Airport Transfer",price:"₹650",rating:"4.2★",duration:"~35 mins",cancel:"Free before 1h"},
+  {provider:"Vistara",service:"Flight DEL-BOM",price:"₹3,899 (1 stop)",rating:"4.5★",duration:"3h 45m",cancel:"Chargeable"}
+];
+const destinations = [
+  {name:"Goa",price:"₹8,999",img:"https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=500&auto=format&fit=crop"},
+  {name:"Hyderabad",price:"₹4,499",img:"https://images.unsplash.com/photo-1600100397608-f70a3ec9ba39?q=80&w=900&auto=format&fit=crop"},
+  {name:"Delhi",price:"₹3,999",img:"https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=500&auto=format&fit=crop"},
+  {name:"Mumbai",price:"₹4,299",img:"https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?q=80&w=500&auto=format&fit=crop"},
+  {name:"Dubai",price:"₹22,999",img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=500&auto=format&fit=crop"},
+  {name:"Paris",price:"₹45,999",img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=500&auto=format&fit=crop"},
+  {name:"Singapore",price:"₹28,499",img:"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=500&auto=format&fit=crop"},
+  {name:"Tokyo",price:"₹52,999",img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=500&auto=format&fit=crop"}
+];
+let sampleTrips = [
+  {id:"TE-FL-10234",type:"flight",icon:"fa-plane",color:"#0d6efd",title:"Delhi → Mumbai (6E-234)",date:"12 Sep 2026, 06:15 AM",status:"confirmed",amount:4599},
+  {id:"TE-HT-88213",type:"hotel",icon:"fa-hotel",color:"#ff7a00",title:"Taj Exotica Resort, Goa (3 nights)",date:"18 Sep 2026 - 21 Sep 2026",status:"confirmed",amount:37500,hotelName:"Taj Exotica Resort",location:"Goa, India",checkIn:"18 Sep 2026",checkOut:"21 Sep 2026",guests:"2 Guests",rooms:1,nights:3,pricePerNight:12500},
+  {id:"TE-CB-55021",type:"cab",icon:"fa-taxi",color:"#20c997",title:"Airport Pickup - Sedan",date:"10 Sep 2026, 09:00 PM",status:"pending",amount:650},
+  {id:"TE-FL-10987",type:"flight",icon:"fa-plane",color:"#0d6efd",title:"Mumbai → Delhi (AI-887)",date:"02 Aug 2026, 07:45 PM",status:"cancelled",amount:5299}
+];
+let selectedCab=null;
+let currentBooking={};
+
+function showToast(message,type="primary"){
+  const holder=$("toastHolder"); const el=document.createElement("div");
+  el.className=`toast align-items-center text-white bg-${type} border-0`; el.setAttribute("role","alert");
+  el.innerHTML=`<div class="d-flex"><div class="toast-body">${message}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
+  holder.appendChild(el); const t=new bootstrap.Toast(el,{delay:3500}); t.show(); el.addEventListener("hidden.bs.toast",()=>el.remove());
+}
+function dateLabel(v){ if(!v) return "-"; return new Date(v+"T00:00:00").toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}); }
+function getGuests(){ const v=$("guests")?.value||"2 Guests"; return v; }
+function getRooms(){ return parseInt($("rooms")?.value||"1",10)||1; }
+function getNights(){ const a=$("checkIn")?.value,b=$("checkOut")?.value; if(!a||!b) return 1; return Math.max(1,Math.ceil((new Date(b)-new Date(a))/86400000)); }
+function saveTrips(){ localStorage.setItem("TravelEaseTrips",JSON.stringify(sampleTrips)); }
+try { const saved=JSON.parse(localStorage.getItem("TravelEaseTrips")||"null"); if(Array.isArray(saved)&&saved.length) sampleTrips=saved; } catch(e){}
+
+/* Search tabs */
+document.querySelectorAll(".search-tab").forEach(tab=>tab.addEventListener("click",()=>{
+  document.querySelectorAll(".search-tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".search-panel").forEach(p=>p.classList.remove("active"));
+  tab.classList.add("active"); $("panel-"+tab.dataset.tab).classList.add("active");
+}));
+$("swapCities").addEventListener("click",()=>{[$("fromCity").value,$("toCity").value]=[$("toCity").value,$("fromCity").value];});
+
+/* Flights */
+function renderFlights(list){
+  const c=$("flightResults"); c.innerHTML="";
+  list.forEach(f=>{ const el=document.createElement("div"); el.className="card-soft flight-card"; el.innerHTML=`
+  <div class="row align-items-center g-3"><div class="col-md-2 d-flex align-items-center gap-2"><div class="airline-logo"><i class="fa-solid ${f.logo}"></i></div><div><strong>${f.airline}</strong><br><small class="text-muted">${f.code}</small></div></div>
+  <div class="col-md-6"><div class="d-flex justify-content-between"><div><div class="flight-route">${f.dep}</div><small class="text-muted">${f.from}</small></div><div class="text-center flex-grow-1 mx-3"><small class="text-muted">${f.duration}</small><div class="flight-line"></div><span class="badge badge-stop">${f.stops}</span></div><div class="text-end"><div class="flight-route">${f.arr}</div><small class="text-muted">${f.to}</small></div></div></div>
+  <div class="col-md-2 text-md-end"><div class="price-tag">${formatCurrency(f.price)}</div><small class="text-muted">per passenger</small></div><div class="col-md-2"><button class="btn btn-primary-grad w-100 book-flight-btn" data-airline="${f.airline}" data-code="${f.code}" data-price="${f.price}" data-route="${f.from} → ${f.to}">Book Now</button></div></div>`; c.appendChild(el); });
+}
+$("flightForm").addEventListener("submit",e=>{e.preventDefault(); if($("fromCity").value.trim().toLowerCase()===$("toCity").value.trim().toLowerCase()){showToast("From and To cities cannot be the same.","danger");return;} if($("roundTrip").checked&&$("returnDate").value<$("departDate").value){showToast("Return date cannot be before departure date.","danger");return;} const fromInfo=cityInfo($("fromCity").value), toInfo=cityInfo($("toCity").value);
+  if(!Object.values(cityAirports).includes(fromInfo.code)||!Object.values(cityAirports).includes(toInfo.code)){showToast("Please select a supported city from the suggestions.","danger");return;}
+  const results=generateFlights($("fromCity").value,$("toCity").value); renderFlights(results); $("flightResultsSection").scrollIntoView({behavior:"smooth"}); showToast("Showing available flights for your route.");});
+$("sortFlights").addEventListener("change",e=>{let x=generateFlights($("fromCity").value,$("toCity").value); if(e.target.value==="price")x.sort((a,b)=>a.price-b.price); if(e.target.value==="departure")x.sort((a,b)=>a.dep.localeCompare(b.dep)); renderFlights(x);});
+
+// Flight booking
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".book-flight-btn");
+  if(!b) return;
+  const passengerText=$("passengers")?.value || "1 Adult";
+  const passengerCount=parseInt(passengerText,10)||1;
+  const basePrice=Number(b.dataset.price)||0;
+  const total=basePrice*passengerCount;
+  const returnText=$("roundTrip")?.checked ? ` | Return: ${dateLabel($("returnDate")?.value)}` : "";
+  currentBooking={
+    type:"flight",
+    service:`${b.dataset.airline} ${b.dataset.code}`,
+    details:`${b.dataset.route} | Departure: ${dateLabel($("departDate")?.value)}${returnText} | ${passengerText} | ${$("flightClass")?.value||"Economy"}`,
+    amount:total,
+    airline:b.dataset.airline,
+    code:b.dataset.code,
+    route:b.dataset.route,
+    departure:dateLabel($("departDate")?.value),
+    returnDate:$("roundTrip")?.checked ? dateLabel($("returnDate")?.value) : "-",
+    passengers:passengerText,
+    passengerCount,
+    flightClass:$("flightClass")?.value||"Economy",
+    pricePerPassenger:basePrice
+  };
+  openPaymentModal();
+});
+
+/* Trains */
+function renderTrains(list){const c=$("trainResults");c.innerHTML="";if(!list.length){c.innerHTML='<div class="card-soft p-4 text-center"><i class="fa-solid fa-train-subway fa-2x text-muted mb-2"></i><h5>No trains found</h5><p class="text-muted mb-0">Try another Indian station or date.</p></div>';return;}list.forEach(t=>{const el=document.createElement('div');el.className='train-card';el.innerHTML=`<div class="row align-items-center g-3"><div class="col-lg-2 d-flex align-items-center gap-2"><div class="train-logo"><i class="fa-solid fa-train"></i></div><div><strong>${t.name}</strong><br><small class="text-muted">${t.number}</small></div></div><div class="col-lg-5"><div class="d-flex justify-content-between align-items-end"><div><strong>${t.dep}</strong><br><span class="station-chip">${t.from}</span></div><div class="text-center flex-grow-1 mx-3"><small class="text-muted">${t.duration}</small><div class="train-route-line my-2"></div><span class="quota-badge">Daily • Available</span></div><div class="text-end"><strong>${t.arr}</strong><br><span class="station-chip">${t.to}</span></div></div></div><div class="col-lg-2"><small class="text-muted d-block">Classes</small><strong>${t.class}</strong><div class="text-primary fw-bold mt-1">${formatCurrency(t.fare)}</div><small class="text-muted">starting fare / passenger</small></div><div class="col-lg-3"><button class="btn btn-primary-grad w-100 book-train-btn" data-name="${t.name}" data-number="${t.number}" data-price="${t.fare}" data-route="${t.from} → ${t.to}" data-dep="${t.dep}" data-arr="${t.arr}" data-duration="${t.duration}"><i class="fa-solid fa-ticket me-1"></i> Book Train</button><small class="text-muted d-block text-center mt-2">Demo booking • secure checkout</small></div></div>`;c.appendChild(el);});}
+$("swapTrainCities").addEventListener("click",()=>{[$("trainFrom").value,$("trainTo").value]=[$("trainTo").value,$("trainFrom").value];});
+$("trainForm").addEventListener("submit",e=>{e.preventDefault();const a=stationInfo($("trainFrom").value),b=stationInfo($("trainTo").value);if(a.code===b.code){showToast("From and To stations cannot be the same.","danger");return;}if(!Object.values(trainStations).includes(a.code)||!Object.values(trainStations).includes(b.code)){showToast("Please select a supported Indian station from the suggestions.","danger");return;}renderTrains(generateTrains($("trainFrom").value,$("trainTo").value));$("trainResultsSection").scrollIntoView({behavior:"smooth"});showToast("Showing train options for your route.","success");});
+$("sortTrains").addEventListener("change",e=>{let x=generateTrains($("trainFrom").value,$("trainTo").value);if(e.target.value==="price")x.sort((a,b)=>a.fare-b.fare);if(e.target.value==="departure")x.sort((a,b)=>a.dep.localeCompare(b.dep));if(e.target.value==="duration")x.sort((a,b)=>parseInt(a.duration)-parseInt(b.duration));renderTrains(x);});
+
+document.addEventListener("click",e=>{const b=e.target.closest(".book-train-btn");if(!b)return;const count=Number($("trainPassengers")?.value||1);const fare=Number(b.dataset.price)||0;currentBooking={type:"train",service:`${b.dataset.name} (${b.dataset.number})`,details:`${b.dataset.route} | ${b.dataset.dep} - ${b.dataset.arr} | ${$("trainClass")?.value||"Sleeper (SL)"} | ${count} passenger(s)`,amount:fare*count,trainName:b.dataset.name,trainNumber:b.dataset.number,route:b.dataset.route,departure:b.dataset.dep,arrival:b.dataset.arr,duration:b.dataset.duration,journeyDate:dateLabel($("trainDate")?.value),trainClass:$("trainClass")?.value||"Sleeper (SL)",passengers:count,pricePerPassenger:fare};openPaymentModal();});
+
+/* Hotels */
+function renderHotels(list){
+  const c=$("hotelResults"); c.innerHTML="";
+  list.forEach(h=>{const col=document.createElement("div");col.className="col-md-4";const stars="★".repeat(h.rating)+"☆".repeat(5-h.rating);const facilities=h.facilities.map(x=>`<span class="facility-badge">${x}</span>`).join("");col.innerHTML=`
+  <div class="card-soft h-100"><img src="${h.img}" class="hotel-img" alt="${h.name}"><div class="p-3"><h5 class="mb-1">${h.name}</h5><p class="text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i>${h.location}</p><div class="rating-stars mb-2">${stars}</div><div class="mb-3">${facilities}</div><div class="d-flex justify-content-between"><div><span class="price-tag" style="font-size:1.2rem;">${formatCurrency(h.price)}</span><br><small class="text-muted">per room / night</small></div></div><div class="d-flex gap-2 mt-3"><button class="btn btn-outline-primary w-100 view-details-btn" data-name="${h.name}">View Details</button><button class="btn btn-primary-grad w-100 book-hotel-btn" data-name="${h.name}" data-price="${h.price}" data-location="${h.location}">Book Now</button></div></div></div>`;c.appendChild(col);});
+}
+function showHotelDetails(h){
+  $("detailsModalBody").innerHTML=`<div class="row g-4"><div class="col-md-5"><img src="${h.img}" class="img-fluid rounded-4 w-100" style="height:250px;object-fit:cover" alt="${h.name}"></div><div class="col-md-7"><h4>${h.name}</h4><p class="text-muted"><i class="fa-solid fa-location-dot me-1"></i>${h.location}</p><div class="rating-stars mb-3">${"★".repeat(h.rating)}${"☆".repeat(5-h.rating)} <span class="text-muted">(${h.rating}/5)</span></div><h6>Amenities</h6><div class="mb-3">${h.facilities.map(x=>`<span class="facility-badge">${x}</span>`).join("")}</div><div class="card-soft p-3"><span class="price-tag">${formatCurrency(h.price)}</span> <span class="text-muted">per room / night</span></div><button class="btn btn-primary-grad mt-3" data-name="${h.name}" data-price="${h.price}" data-location="${h.location}" id="modalHotelBookBtn">Book This Hotel</button></div></div>`;
+  new bootstrap.Modal($("detailsModal")).show();
+}
+$("hotelForm").addEventListener("submit",e=>{e.preventDefault();if($("checkOut").value<=$("checkIn").value){showToast("Check-out must be after check-in.","danger");return;}renderHotels(hotelData);$("hotels").scrollIntoView({behavior:"smooth"});showToast("Hotels updated for your destination and dates.");});
+
+document.addEventListener("click",e=>{
+  const detail=e.target.closest(".view-details-btn");
+  if(detail){const h=hotelData.find(x=>x.name===detail.dataset.name);if(h)showHotelDetails(h);return;}
+  const modalBook=e.target.closest("#modalHotelBookBtn");
+  if(modalBook){bootstrap.Modal.getInstance($("detailsModal"))?.hide();bookHotel(modalBook.dataset);}
+  const hb=e.target.closest(".book-hotel-btn"); if(hb)bookHotel(hb.dataset);
+});
+function bookHotel(d){
+  const checkIn=$("checkIn").value, checkOut=$("checkOut").value; const nights=getNights(), rooms=getRooms(); const price=Number(d.price); const total=price*nights*rooms;
+  currentBooking={type:"hotel",service:`Hotel - ${d.name}`,details:d.location,amount:total,hotelName:d.name,location:d.location,pricePerNight:price,checkIn,checkOut,guests:getGuests(),rooms,nights};
+  openPaymentModal();
+}
+
+/* Cabs */
+function renderCabs(){const c=$("cabResults");c.innerHTML="";cabTypes.forEach(x=>{const col=document.createElement("div");col.className="col-md-3 col-6";col.innerHTML=`<div class="card-soft cab-card" data-type="${x.type}" data-base="${x.baseFare}" data-perkm="${x.perKm}"><i class="fa-solid ${x.icon}"></i><h5 class="mt-2 mb-0">${x.type}</h5><small class="text-muted">${x.capacity}</small><div class="mt-2 fw-semibold text-primary">${formatCurrency(x.baseFare)} base</div></div>`;c.appendChild(col);});c.querySelectorAll(".cab-card").forEach(card=>card.addEventListener("click",()=>{c.querySelectorAll(".cab-card").forEach(x=>x.classList.remove("selected"));card.classList.add("selected");const fare=Number(card.dataset.base)+12*Number(card.dataset.perkm);selectedCab={type:card.dataset.type,fare};$("estimatedFare").textContent=formatCurrency(fare);}));}
+$("cabForm").addEventListener("submit",e=>{e.preventDefault();$("cabs").scrollIntoView({behavior:"smooth"});showToast("Cab options updated for your route.");});
+$("bookCabBtn").addEventListener("click",()=>{if(!selectedCab){showToast("Please select a cab type first.","warning");return;}currentBooking={type:"cab",service:`Cab - ${selectedCab.type}`,details:`${$("pickupLoc").value} → ${$("dropLoc").value}`,amount:selectedCab.fare,cabType:selectedCab.type,route:`${$("pickupLoc").value} → ${$("dropLoc").value}`,cabDate:dateLabel($("cabDate").value),cabTime:$("cabTime").value};openPaymentModal();});
+
+/* Compare + destinations */
+function renderCompareTable(){const b=$("compareTableBody");b.innerHTML="";compareData.forEach(r=>{const tr=document.createElement("tr");tr.innerHTML=`<td><strong>${r.provider}</strong></td><td>${r.service}</td><td class="text-primary fw-semibold">${r.price}</td><td>${r.rating}</td><td>${r.duration}</td><td>${r.cancel}</td><td><button class="btn btn-sm btn-primary-grad compare-book-btn" data-service="${r.service}" data-price="${r.price}">Book Now</button></td>`;b.appendChild(tr);});}
+function renderDestinations(){const c=$("destinationsContainer");c.innerHTML="";destinations.forEach(d=>{const col=document.createElement("div");col.className="col-md-3 col-sm-6";col.innerHTML=`<div class="dest-card card-soft"><img src="${d.img}" alt="${d.name}"><div class="dest-overlay"><h5 class="mb-0">${d.name}</h5><small>Starting from ${d.price}</small><button class="btn btn-sm btn-light mt-2 fw-semibold explore-btn" data-name="${d.name}">Explore</button></div></div>`;c.appendChild(col);});}
+document.addEventListener("click",e=>{const b=e.target.closest(".compare-book-btn");if(b){currentBooking={type:"comparison",service:b.dataset.service,details:"Selected from Fare Comparison",amount:parseInt(b.dataset.price.replace(/[^\d]/g,""))||1000};openPaymentModal();}const x=e.target.closest(".explore-btn");if(x){$("fromCity").value="Delhi (DEL)";$("toCity").value=x.dataset.name;document.querySelector('.search-tab[data-tab="flights"]').click();$("booking").scrollIntoView({behavior:"smooth"});}});
+
+document.querySelectorAll(".train-route-chip").forEach(b=>b.addEventListener("click",()=>{$("trainFrom").value=b.dataset.from;$("trainTo").value=b.dataset.to;document.querySelector('.search-tab[data-tab="trains"]').click();$("trainForm").requestSubmit();}));
+
+document.querySelectorAll(".route-chip:not(.train-route-chip)").forEach(b=>b.addEventListener("click",()=>{
+  $("fromCity").value=b.dataset.from; $("toCity").value=b.dataset.to;
+  document.querySelector('.search-tab[data-tab="flights"]').click();
+  const form=$("flightForm"); if(form){form.requestSubmit();}
+}));
+
+document.querySelectorAll(".book-offer").forEach(b=>b.addEventListener("click",()=>{$("booking").scrollIntoView({behavior:"smooth"});showToast("Offer applied. Search now to use the offer.","success");}));
+
+/* My Trips */
+function renderTrips(){const c=$("tripsContainer");c.innerHTML="";sampleTrips.forEach((t,i)=>{const sc=t.status==="confirmed"?"status-confirmed":t.status==="pending"?"status-pending":"status-cancelled";const row=document.createElement("div");row.className="trip-row card-soft";row.innerHTML=`<div class="trip-icon" style="background:${t.color||"#0d6efd"}"><i class="fa-solid ${t.icon}"></i></div><div class="flex-grow-1"><h6 class="mb-1">${t.title}</h6><small class="text-muted">Booking ID: ${t.id} &nbsp;|&nbsp; ${t.date}</small></div><span class="status-badge ${sc}">${t.status[0].toUpperCase()+t.status.slice(1)}</span><button class="btn btn-sm btn-outline-primary view-trip-btn" data-idx="${i}">View Details</button>${t.status!=="cancelled"?`<button class="btn btn-sm btn-outline-danger cancel-trip-btn" data-idx="${i}">Cancel</button>`:""}`;c.appendChild(row);});}
+function showTripDetails(t){
+  let html=`<div class="row g-3"><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Booking ID</div><div class="hotel-detail-value">${t.id}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Status</div><div class="hotel-detail-value">${t.status.toUpperCase()}</div></div></div><div class="col-md-12"><div class="hotel-booking-details"><div class="hotel-detail-label">Service</div><div class="hotel-detail-value">${t.title}</div></div></div>`;
+  if(t.type==="hotel") html+=`<div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Hotel</div><div class="hotel-detail-value">${t.hotelName||t.title}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Location</div><div class="hotel-detail-value">${t.location||"-"}</div></div></div><div class="col-md-3"><div class="hotel-booking-details"><div class="hotel-detail-label">Check-in</div><div class="hotel-detail-value">${t.checkIn||"-"}</div></div></div><div class="col-md-3"><div class="hotel-booking-details"><div class="hotel-detail-label">Check-out</div><div class="hotel-detail-value">${t.checkOut||"-"}</div></div></div><div class="col-md-2"><div class="hotel-booking-details"><div class="hotel-detail-label">Nights</div><div class="hotel-detail-value">${t.nights||"-"}</div></div></div><div class="col-md-2"><div class="hotel-booking-details"><div class="hotel-detail-label">Rooms</div><div class="hotel-detail-value">${t.rooms||"-"}</div></div></div><div class="col-md-2"><div class="hotel-booking-details"><div class="hotel-detail-label">Guests</div><div class="hotel-detail-value">${t.guests||"-"}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Price / Room / Night</div><div class="hotel-detail-value">${formatCurrency(t.pricePerNight)}</div></div></div>`;
+  if(t.type==="flight") html+=`<div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Airline</div><div class="hotel-detail-value">${t.airline||"-"} (${t.code||"-"})</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Route</div><div class="hotel-detail-value">${t.route||"-"}</div></div></div><div class="col-md-4"><div class="hotel-booking-details"><div class="hotel-detail-label">Departure</div><div class="hotel-detail-value">${t.departure||"-"}</div></div></div><div class="col-md-4"><div class="hotel-booking-details"><div class="hotel-detail-label">Return</div><div class="hotel-detail-value">${t.returnDate||"-"}</div></div></div><div class="col-md-4"><div class="hotel-booking-details"><div class="hotel-detail-label">Class</div><div class="hotel-detail-value">${t.flightClass||"Economy"}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Passengers</div><div class="hotel-detail-value">${t.passengers||"-"}</div></div></div>`;
+  if(t.type==="cab") html+=`<div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Cab Type</div><div class="hotel-detail-value">${t.cabType||t.title.replace(/^Cab - /,"")}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Route</div><div class="hotel-detail-value">${t.route||t.details||"-"}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Travel Date</div><div class="hotel-detail-value">${t.cabDate||"-"}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Travel Time</div><div class="hotel-detail-value">${t.cabTime||"-"}</div></div></div>`;
+  html+=`<div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Payment Method</div><div class="hotel-detail-value">${t.paymentMethod||"-"}</div></div></div><div class="col-md-6"><div class="hotel-booking-details"><div class="hotel-detail-label">Amount Paid</div><div class="hotel-detail-value text-primary">${formatCurrency(t.amount)}</div></div></div></div>`;
+  $("detailsModalBody").innerHTML=html;new bootstrap.Modal($("detailsModal")).show();
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".view-trip-btn");if(b)showTripDetails(sampleTrips[Number(b.dataset.idx)]);const c=e.target.closest(".cancel-trip-btn");if(c){const t=sampleTrips[Number(c.dataset.idx)];if(t&&confirm("Are you sure you want to cancel this booking?")){t.status="cancelled";saveTrips();renderTrips();showToast("Booking cancelled.","warning");}}});
+
+/* Payment */
+let selectedPaymentMethod="Credit Card";
+function generateUPIQRCode(){const box=$("upiQRCode");box.innerHTML="";if(typeof QRCode==="undefined"){box.innerHTML='<div class="text-danger">QR library could not load.</div>';return;}const amount=Number(currentBooking.amount||0);const upi=`upi://pay?pa=travelease@upi&pn=TravelEase&am=${amount}&cu=INR`;new QRCode(box,{text:upi,width:180,height:180,correctLevel:QRCode.CorrectLevel.H});$("upiAmount").textContent=formatCurrency(amount);}
+function setPaymentFields(method){selectedPaymentMethod=method;document.querySelectorAll(".pay-method").forEach(m=>m.classList.toggle("selected",m.dataset.method===method));$("cardFields").style.display=(method==="Credit Card"||method==="Debit Card")?"block":"none";$("upiFields").style.display=method==="UPI"?"block":"none";$("netBankingFields").style.display=method==="Net Banking"?"block":"none";[...document.querySelectorAll("#paymentForm input,#paymentForm select")].forEach(x=>x.required=false);if(method==="UPI"){$("upiTransactionId").required=true;generateUPIQRCode();}else if(method==="Net Banking"){$("bankSelect").required=true;}else{$("cardNumber").required=true;$("cardExpiry").required=true;$("cardCvv").required=true;}}
+document.querySelectorAll(".pay-method").forEach(m=>m.addEventListener("click",()=>setPaymentFields(m.dataset.method)));
+function openPaymentModal(){
+  $("paySummaryService").textContent=currentBooking.service||"-";$("paySummaryDetails").textContent=currentBooking.details||"-";$("paySummaryAmount").textContent=formatCurrency(currentBooking.amount);
+  const isHotel=currentBooking.type==="hotel";$("hotelPaymentDetails").style.display=isHotel?"block":"none";
+  if(isHotel){$("payHotelName").textContent=currentBooking.hotelName;$("payHotelLocation").textContent=currentBooking.location;$("payHotelCheckIn").textContent=dateLabel(currentBooking.checkIn);$("payHotelCheckOut").textContent=dateLabel(currentBooking.checkOut);$("payHotelNights").textContent=currentBooking.nights;$("payHotelGuests").textContent=currentBooking.guests;$("payHotelRooms").textContent=currentBooking.rooms;$("payHotelPrice").textContent=formatCurrency(currentBooking.pricePerNight);$("payHotelTotal").textContent=formatCurrency(currentBooking.amount);}
+  setPaymentFields("Credit Card");new bootstrap.Modal($("paymentModal")).show();
+}
+$("paymentForm").addEventListener("submit",e=>{e.preventDefault();if(!e.currentTarget.checkValidity()){e.currentTarget.classList.add("was-validated");return;}const id=generateBookingId("TE-BK");const paidDate=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"});const t={id,type:currentBooking.type||"booking",icon:currentBooking.type==="hotel"?"fa-hotel":currentBooking.type==="cab"?"fa-taxi":currentBooking.type==="train"?"fa-train":"fa-plane",color:currentBooking.type==="hotel"?"#ff7a00":currentBooking.type==="cab"?"#20c997":currentBooking.type==="train"?"#6f42c1":"#0d6efd",title:currentBooking.service||"Travel Booking",date:currentBooking.type==="hotel"?`${dateLabel(currentBooking.checkIn)} - ${dateLabel(currentBooking.checkOut)}`:paidDate,status:"confirmed",amount:Number(currentBooking.amount||0),paymentMethod:selectedPaymentMethod};
+  if(currentBooking.type==="hotel") Object.assign(t,{hotelName:currentBooking.hotelName,location:currentBooking.location,checkIn:dateLabel(currentBooking.checkIn),checkOut:dateLabel(currentBooking.checkOut),guests:currentBooking.guests,rooms:currentBooking.rooms,nights:currentBooking.nights,pricePerNight:currentBooking.pricePerNight});
+  if(currentBooking.type==="flight") Object.assign(t,{airline:currentBooking.airline,code:currentBooking.code,route:currentBooking.route,departure:currentBooking.departure,returnDate:currentBooking.returnDate,passengers:currentBooking.passengers,flightClass:currentBooking.flightClass,pricePerPassenger:currentBooking.pricePerPassenger});
+  if(currentBooking.type==="cab") Object.assign(t,{cabType:currentBooking.cabType,route:currentBooking.route,cabDate:currentBooking.cabDate,cabTime:currentBooking.cabTime});
+  if(currentBooking.type==="train") Object.assign(t,{trainName:currentBooking.trainName,trainNumber:currentBooking.trainNumber,route:currentBooking.route,departure:currentBooking.departure,arrival:currentBooking.arrival,duration:currentBooking.duration,journeyDate:currentBooking.journeyDate,trainClass:currentBooking.trainClass,passengers:currentBooking.passengers,pricePerPassenger:currentBooking.pricePerPassenger});
+  sampleTrips.unshift(t);saveTrips();renderTrips();$("confBookingId").textContent=id;$("confService").textContent=t.title;$("confDate").textContent=t.date;$("confAmount").textContent=formatCurrency(t.amount);bootstrap.Modal.getInstance($("paymentModal"))?.hide();setTimeout(()=>new bootstrap.Modal($("confirmationModal")).show(),250);showToast("Payment successful! Booking confirmed.","success");e.currentTarget.reset();});
+
+/* Confirmation / ticket */
+$("downloadTicketBtn").addEventListener("click",()=>{const t=sampleTrips.find(x=>x.id===$("confBookingId").textContent);let text=`TRAVELEASE\n================================\n\nBooking ID : ${$("confBookingId").textContent}\nService    : ${$("confService").textContent}\nDate       : ${$("confDate").textContent}\nAmount     : ${$("confAmount").textContent}\nStatus     : CONFIRMED\n`;if(t?.type==="hotel")text+=`\nHOTEL DETAILS\nHotel      : ${t.hotelName}\nLocation   : ${t.location}\nCheck-in   : ${t.checkIn}\nCheck-out  : ${t.checkOut}\nNights     : ${t.nights}\nGuests     : ${t.guests}\nRooms      : ${t.rooms}\nPrice/Night: ${formatCurrency(t.pricePerNight)}\nTotal      : ${formatCurrency(t.amount)}\n`;if(t?.type==="flight")text+=`\nFLIGHT DETAILS\nAirline    : ${t.airline} (${t.code})\nRoute      : ${t.route}\nDeparture  : ${t.departure}\nReturn     : ${t.returnDate}\nPassengers : ${t.passengers}\nClass      : ${t.flightClass}\nPrice/Person: ${formatCurrency(t.pricePerPassenger)}\n`;if(t?.type==="train")text+=`\nTRAIN DETAILS\nTrain      : ${t.trainName} (${t.trainNumber})\nRoute      : ${t.route}\nJourney    : ${t.journeyDate}\nDeparture  : ${t.departure}\nArrival    : ${t.arrival}\nDuration   : ${t.duration}\nClass      : ${t.trainClass}\nPassengers : ${t.passengers}\nFare/Person: ${formatCurrency(t.pricePerPassenger)}\nTotal      : ${formatCurrency(t.amount)}\n`;if(t?.type==="cab")text+=`\nCAB DETAILS\nCab Type   : ${t.cabType}\nRoute      : ${t.route}\nDate       : ${t.cabDate}\nTime       : ${t.cabTime}\n`;text+=`\nPayment    : ${t?.paymentMethod||"-"}\nThank you for booking with TravelEase.`;const url=URL.createObjectURL(new Blob([text],{type:"text/plain"}));const a=document.createElement("a");a.href=url;a.download=$("confBookingId").textContent+".txt";a.click();URL.revokeObjectURL(url);showToast("Ticket downloaded.","success");});
+$("goToTripsBtn").addEventListener("click",()=>setTimeout(()=>$("mytrips").scrollIntoView({behavior:"smooth"}),300));
+
+/* Login / register / account */
+function getStoredAccount(){
+  try { return JSON.parse(localStorage.getItem("TravelEaseAccount")||"null"); } catch(e){ return null; }
+}
+function getCurrentUser(){
+  return localStorage.getItem("TravelEaseUser") || "";
+}
+function showAccount(){
+  const email=getCurrentUser();
+  const account=getStoredAccount();
+  if(!email){
+    new bootstrap.Modal($("loginModal")).show();
+    return;
+  }
+  const name=account?.email?.toLowerCase()===email.toLowerCase() ? account.name : (localStorage.getItem("TravelEaseName")||email.split("@")[0]);
+  $("accountName").textContent=name;
+  $("accountEmail").textContent=email;
+  $("accountSince").textContent=account?.createdAt ? new Date(account.createdAt).toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) : "2026";
+  $("accountBookings").textContent=sampleTrips.filter(t=>t.status!=="cancelled").length;
+  new bootstrap.Modal($("accountModal")).show();
+}
+function logoutUser(){
+  localStorage.removeItem("TravelEaseUser");
+  localStorage.removeItem("TravelEaseName");
+  updateAuth();
+  bootstrap.Modal.getInstance($("accountModal"))?.hide();
+  showToast("Logged out successfully.","info");
+}
+function updateAuth(){
+  const email=getCurrentUser();
+  const account=getStoredAccount();
+  const wrap=$("authButtons");
+  if(!wrap) return;
+  if(email){
+    const name=(account?.email?.toLowerCase()===email.toLowerCase()?account.name:(localStorage.getItem("TravelEaseName")||email.split("@")[0])).split(" ")[0];
+    wrap.innerHTML=`<button class="btn btn-outline-primary" id="accountBtn"><i class="fa-solid fa-circle-user me-1"></i>${name}</button><button class="btn btn-danger" id="logoutBtn"><i class="fa-solid fa-right-from-bracket me-1"></i>Logout</button>`;
+    $("accountBtn").addEventListener("click",showAccount);
+    $("logoutBtn").addEventListener("click",logoutUser);
+  } else {
+    wrap.innerHTML=`<button class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button><button class="btn btn-primary-grad" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>`;
+  }
+}
+$("loginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f=e.currentTarget;
+  if(!f.checkValidity()){f.classList.add("was-validated");return;}
+  const email=$("loginEmail").value.trim().toLowerCase();
+  const password=$("loginPassword").value;
+  const account=getStoredAccount();
+  if(!account || account.email.toLowerCase()!==email){showToast("No account found. Please register first.","danger");return;}
+  if(account.password!==password){showToast("Incorrect password.","danger");return;}
+  localStorage.setItem("TravelEaseUser",email);
+  localStorage.setItem("TravelEaseName",account.name);
+  bootstrap.Modal.getInstance($("loginModal"))?.hide();
+  f.reset(); f.classList.remove("was-validated");
+  updateAuth();
+  showToast("Login successful!","success");
+  setTimeout(showAccount,350);
+});
+$("registerForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f=e.currentTarget;
+  const email=$("regEmail").value.trim().toLowerCase();
+  $("regConfirmPassword").setCustomValidity($("regPassword").value===$("regConfirmPassword").value?"":"Passwords do not match");
+  if(!f.checkValidity()){f.classList.add("was-validated");return;}
+  const existing=getStoredAccount();
+  if(existing?.email?.toLowerCase()===email){showToast("An account with this email already exists. Please login.","warning");return;}
+  const account={name:$("regName").value.trim(),email,password:$("regPassword").value,createdAt:new Date().toISOString()};
+  localStorage.setItem("TravelEaseAccount",JSON.stringify(account));
+  localStorage.setItem("TravelEaseUser",email);
+  localStorage.setItem("TravelEaseName",account.name);
+  bootstrap.Modal.getInstance($("registerModal"))?.hide();
+  f.reset(); f.classList.remove("was-validated");
+  updateAuth();
+  showToast("Account created successfully!","success");
+  setTimeout(showAccount,350);
+});
+$("accountLogoutBtn").addEventListener("click",logoutUser);
+$("accountTripsBtn").addEventListener("click",()=>{bootstrap.Modal.getInstance($("accountModal"))?.hide();setTimeout(()=>$("mytrips").scrollIntoView({behavior:"smooth"}),250);});
+document.querySelector('a.small[href="#"]')?.addEventListener("click",e=>{e.preventDefault();const email=prompt("Enter your registered email:");const account=getStoredAccount();if(email&&account?.email?.toLowerCase()===email.trim().toLowerCase())showToast("Password reset link sent. (Demo)","info");else if(email)showToast("Email not found.","danger");});
+
+/* Round trip + dates */
+function updateRoundTrip(){const on=$("roundTrip").checked;$("returnDate").disabled=!on;$("returnDate").required=on;if(!on)$("returnDate").value="";}
+$("oneWay").addEventListener("change",updateRoundTrip);$("roundTrip").addEventListener("change",updateRoundTrip);
+const today=new Date();const fmt=d=>d.toISOString().slice(0,10);const tomorrow=new Date(today);tomorrow.setDate(today.getDate()+1);const nextWeek=new Date(today);nextWeek.setDate(today.getDate()+7);$("departDate").value=fmt(tomorrow);$("returnDate").value=fmt(nextWeek);$("trainDate").value=fmt(tomorrow);$("checkIn").value=fmt(tomorrow);$("checkOut").value=fmt(nextWeek);$("cabDate").value=fmt(today);$("cabTime").value="09:00";updateRoundTrip();
+
+renderFlights(flightData);renderTrains(generateTrains($("trainFrom").value,$("trainTo").value));renderHotels(hotelData);renderCabs();renderCompareTable();renderDestinations();renderTrips();updateAuth();
+</script>
+
+</body>
+</html>
